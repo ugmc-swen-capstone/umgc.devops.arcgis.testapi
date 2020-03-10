@@ -3,6 +3,8 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
+        "postinstall": "ng build --aot -prod",
+        "heroku-postbuild": "ng build --prod",
         "start": "ng serve",
         "build": "ng build",
         "test": "ng test",
@@ -26,7 +28,8 @@
         "esri-loader": "^2.13.0",
         "rxjs": "^6.5.4",
         "tslib": "^1.11.1",
-        "zone.js": "~0.10.2"
+        "zone.js": "~0.10.2",
+        "typescript": "~3.7.5"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.900.5",

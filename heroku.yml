@@ -1,0 +1,3 @@
+build:
+    docker:
+        build.docker.web: docker-dev.dockerfile
