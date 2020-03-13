@@ -1,28 +1,32 @@
 #stage 1: build and deploy dev version of application
 FROM gmathieu/node-browsers:3.0.0 AS build
 
-WORKDIR /usr/angular-workdir
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 
-RUN npm install
+## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
+RUN npm ci && mkdir /ng-app && mv ./node_modules ./ng-app
 
-ENV PATH="./node_modules/.bin:$PATH"
+#ENV PATH="./node_modules/.bin:$PATH"
+
+WORKDIR /ng-app
+
 
 COPY . ./
 
-RUN ng build --prod
+RUN npm run ng build --prod --output-path=dist
 
 FROM nginx:1.15.8-alpine
 
 ## Remove default Nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY ./dev/nginx.conf /etc/nginx/nginx.conf
-## COPY ./dev/nginx.conf /etc/nginx/conf.d/default.conf
+## Copy our default nginx config
+COPY ./dev/default.nginx.conf /etc/nginx/conf.d/
+## COPY ./dev/nginx.conf /etc/nginx/conf.d/default.conf.template
+## COPY ./dev/nginx.conf /etc/nginx/nginx.conf
 
-WORKDIR /usr/share/nginx/html
+## From ‘build’ stage copy over the artifacts in dist folder to default nginx public folder
+COPY --from=build  /ng-app/dist /usr/share/nginx/html
 
-COPY --from=build  /usr/angular-workdir/dist/cdcop-app-project .
-
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+CMD ["nginx", "-g", "daemon off;"]

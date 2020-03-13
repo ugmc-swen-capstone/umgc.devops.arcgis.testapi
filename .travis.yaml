@@ -1,8 +1,13 @@
+sudo: required
+
 language: node_js
 node_js:
-    - '9'
+    - '12'
+
+services:
+    - docker
+
 dist: trusty
-sudo: required
 git:
     depth: 3
 branches:
@@ -10,6 +15,34 @@ branches:
         - master
 before_script:
     - npm install -g @angular/cli
+
+before_install:
+    # install heroku CLI
+    - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+    # login to docker registries (dockerhub + heroku)
+    - echo "$ DOCKER" | docker login -u "$ DOCKER_USER" --password-stdin
+    - echo "$ HEROKU_PASSWORD" | docker login -u "$ HEROKU_USERNAME" --password-stdin registry.heroku.com
+    # install heroku CLI
+    - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+    - echo "$ HEROKU_PASS" | docker login -u "$ HEROKU_USER" --password-stdin registry.heroku.com
+
+install:
+    # install deps
+    - npm install
+
 script:
     - ng lint
     - ng build --prod --base-href https://t-palmer.github.io/travis-demo/
+    - docker push umgccapstonebot/arcgis-webapi-test;
+    - docker tag umgccapstonebot/arcgis-webapi-test registry.heroku.com/$HEROKU_APP_NAME/
+
+deploy:
+    provider: script
+    script:
+        # push to dockerhub
+        docker push umgccapstonebot/arcgis-webapi-test;
+        docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+        heroku container:
+            release web --app $ HEROKU_APP_NAME
+
+    branch: master
