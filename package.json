@@ -3,11 +3,17 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
+        "buildgp": " ng build --prod --base-href http://umgc-capstone-bot.github.io/umgc.devops.arcgis.testapi",
         "start": "ng serve",
         "build": "ng build",
-        "test": "ng test",
+        "test": "ng test --code-coverage",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "cypress:open": "cypress open",
+        "cypress:local": "run-p start cypress:run",
+        "cypress:ci": "ng build --prod && run-p --race start:ci cypress:run",
+        "cypress:run": "cypress run",
+        "start:ci": "http-server ./dist/appv7 -a localhost -p 4200 -c-1"
     },
     "private": true,
     "dependencies": {
