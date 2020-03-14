@@ -16,64 +16,73 @@ cache:
   directories:
   - ./node_modules
 
-services:
-  - docker
+# services:
+#   - docker
 
-branches:
-  only:
-  - master
+# branches:
+#   only:
+#   - master
 
-env:
-  secure: "BkwtXAr2fLNrZkEkRQE2uFO8KrvFq0lJ35NT6O+hlzQtTtuRVKVfwZ93+8Y2aezDyCyhg1LUamQ262SuQ5KSS7pbG85iHO+UYVi2mOkbke/AbQwkUyULevl3xkdawQJVKOMUR0Mdiu74l20/oq+Serv36R60h4/9VELS6L8AQ6oCKxd38BrpQeqnNS64zojEu6HIXf86kha1JKclFVTW9xHP67glfKpPnFDHF5fEmLzC+OVfuA0ZsQ9jcjke1rBJYHAZyvVnsKKDTIv8N/MyWe6wyfklMD/Xoi48eyWhZyBJbPRvKdinGW3gL38DhoDIxCHo9CjARKqUV642RgI96ITkif8F0nGQrD/VOQpCxbNsXUJoZ1lBRBynxPvG7uYWard0uamFzAt8Hyx1Wrey/XWbsSJ8Xx8es+0L9F07BJtZQKUqjKxRYiBlVoH53G9Nn+KNUl9pc7g8yaDIr4aL3KJvfkDjezewxmFWlpn8oB46r77VBqhfbI8I8ZplWjR2xu4aGGnUo/IjAqMHvOLKgCsyD1DXsM4rHzefRtuTx/l6+wqVtffiIcV5nhN7PyFIJf928y6iNe9UXscL9YLgWFTMMnsARbUuIh8+s9GQGVG6PalAfjx/t5MlB4FBgcUeM4WFvj0AtC6aeCZTFDVaYTSfuQf8nTs6elZRDQyS83I="
+# env:
+#   secure: "BkwtXAr2fLNrZkEkRQE2uFO8KrvFq0lJ35NT6O+hlzQtTtuRVKVfwZ93+8Y2aezDyCyhg1LUamQ262SuQ5KSS7pbG85iHO+UYVi2mOkbke/AbQwkUyULevl3xkdawQJVKOMUR0Mdiu74l20/oq+Serv36R60h4/9VELS6L8AQ6oCKxd38BrpQeqnNS64zojEu6HIXf86kha1JKclFVTW9xHP67glfKpPnFDHF5fEmLzC+OVfuA0ZsQ9jcjke1rBJYHAZyvVnsKKDTIv8N/MyWe6wyfklMD/Xoi48eyWhZyBJbPRvKdinGW3gL38DhoDIxCHo9CjARKqUV642RgI96ITkif8F0nGQrD/VOQpCxbNsXUJoZ1lBRBynxPvG7uYWard0uamFzAt8Hyx1Wrey/XWbsSJ8Xx8es+0L9F07BJtZQKUqjKxRYiBlVoH53G9Nn+KNUl9pc7g8yaDIr4aL3KJvfkDjezewxmFWlpn8oB46r77VBqhfbI8I8ZplWjR2xu4aGGnUo/IjAqMHvOLKgCsyD1DXsM4rHzefRtuTx/l6+wqVtffiIcV5nhN7PyFIJf928y6iNe9UXscL9YLgWFTMMnsARbUuIh8+s9GQGVG6PalAfjx/t5MlB4FBgcUeM4WFvj0AtC6aeCZTFDVaYTSfuQf8nTs6elZRDQyS83I="
 
-before_script:
-  - npm install -g --silent -g @angular/cli
+# before_script:
+#   - npm install -g --silent -g @angular/cli
 
-before_install:
-    # install heroku CLI
-  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-    # login to docker registries (dockerhub + heroku)
-  - echo "$ DOCKER" | docker login -u "$ DOCKER_USER" --password-stdin
-  - echo "$ HEROKU_PASSWORD" | docker login -u "$ HEROKU_USERNAME" --password-stdin registry.heroku.com
-    # install heroku CLI
-  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-  - echo "$ HEROKU_PASS" | docker login -u "$ HEROKU_USER" --password-stdin registry.heroku.com
+# before_install:
+#     # install heroku CLI
+#   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+#     # login to docker registries (dockerhub + heroku)
+#   - echo "$ DOCKER" | docker login -u "$ DOCKER_USER" --password-stdin
+#   - echo "$ HEROKU_PASSWORD" | docker login -u "$ HEROKU_USERNAME" --password-stdin registry.heroku.com
+#     # install heroku CLI
+#   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+#   - echo "$ HEROKU_PASS" | docker login -u "$ HEROKU_USER" --password-stdin registry.heroku.com
 
-install:
-    # install deps
-    - npm install
+# install:
+#     # install deps
+#     - npm install
 
-script:
-    - ng lint
-    # - npm run test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
-    # - ng build --prod --base-href http://umgc-capstone-bot.github.io/umgc.devops.arcgis.testapi
-    - npm run cypress:ci
-    - npm run test
-    - sonar-scanner
-    - npm run buildgp
-    - docker push umgccapstonebot/arcgis-webapi-test;
-    - docker tag umgccapstonebot/arcgis-webapi-test registry.heroku.com/$HEROKU_APP_NAME/
+# script:
+#     - ng lint
+#     # - npm run test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+#     # - ng build --prod --base-href http://umgc-capstone-bot.github.io/umgc.devops.arcgis.testapi
+#     - npm run cypress:ci
+#     - npm run test
+#     - sonar-scanner
+#     - npm run buildgp
+#     - docker push umgccapstonebot/arcgis-webapi-test;
+#     - docker tag umgccapstonebot/arcgis-webapi-test registry.heroku.com/$HEROKU_APP_NAME/
 
-deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: "$GITHUB_TOKEN"
-    local_dir: dist/appv7
-    on:
-      branch: master
+# deploy:
+#   provider: pages
+#   skip_cleanup: true
+#   github_token: "$GITHUB_TOKEN"
+#   local_dir: dist/appv7
 
-    provider: script
-    script:
-        # push to dockerhub
-        docker push umgccapstonebot/arcgis-webapi-test;
-        docker push registry.heroku.com/$HEROKU_APP_NAME/web;
-        heroku container:
-            release web --app $ HEROKU_APP_NAME
+#   on:
+#     branch: master
 
-    branch:
-        master
+#   provider: heroku
 
-notifications:
-    email:
-        on_failure: change
-        on_success: change
+#   app: $HEROKU_APP_NAME
+
+
+
+
+
+#     provider: script
+#     script:
+#         # push to dockerhub
+#         docker push umgccapstonebot/arcgis-webapi-test;
+#         docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+#         heroku container:
+#             release web --app $ HEROKU_APP_NAME
+
+#     branch:
+#         master
+
+# notifications:
+#     email:
+#         on_failure: change
+#         on_success: change
