@@ -24,7 +24,6 @@ branches:
 env:
     secure: "BkwtXAr2fLNrZkEkRQE2uFO8KrvFq0lJ35NT6O+hlzQtTtuRVKVfwZ93+8Y2aezDyCyhg1LUamQ262SuQ5KSS7pbG85iHO+UYVi2mOkbke/AbQwkUyULevl3xkdawQJVKOMUR0Mdiu74l20/oq+Serv36R60h4/9VELS6L8AQ6oCKxd38BrpQeqnNS64zojEu6HIXf86kha1JKclFVTW9xHP67glfKpPnFDHF5fEmLzC+OVfuA0ZsQ9jcjke1rBJYHAZyvVnsKKDTIv8N/MyWe6wyfklMD/Xoi48eyWhZyBJbPRvKdinGW3gL38DhoDIxCHo9CjARKqUV642RgI96ITkif8F0nGQrD/VOQpCxbNsXUJoZ1lBRBynxPvG7uYWard0uamFzAt8Hyx1Wrey/XWbsSJ8Xx8es+0L9F07BJtZQKUqjKxRYiBlVoH53G9Nn+KNUl9pc7g8yaDIr4aL3KJvfkDjezewxmFWlpn8oB46r77VBqhfbI8I8ZplWjR2xu4aGGnUo/IjAqMHvOLKgCsyD1DXsM4rHzefRtuTx/l6+wqVtffiIcV5nhN7PyFIJf928y6iNe9UXscL9YLgWFTMMnsARbUuIh8+s9GQGVG6PalAfjx/t5MlB4FBgcUeM4WFvj0AtC6aeCZTFDVaYTSfuQf8nTs6elZRDQyS83I="
 
-
 before_script:
     - npm install -g --silent -g @angular/cli
 
@@ -69,7 +68,8 @@ deploy:
         heroku container:
             release web --app $ HEROKU_APP_NAME
 
-    branch: master
+    branch:
+        master
 
 notifications:
     email:
