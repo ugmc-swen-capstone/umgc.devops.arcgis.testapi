@@ -5,17 +5,12 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressLocatorService } from './address-locator.service';
 import { MatCardModule } from '@angular/material/card';
-import {
-    MatAutocomplete,
-    MatAutocompleteModule,
-} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
-    let initEsriLibSpy: jasmine.Spy;
-
     beforeEach(async(() => {
         const addressService = jasmine.createSpyObj('AddressLocatorService', [
             'getAddressSuggestion',

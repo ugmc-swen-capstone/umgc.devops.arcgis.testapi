@@ -28,7 +28,7 @@ install:
 # SCRIPT PHASE
 
 script:
-    - ng lint
+    - npm run lint
     - ng test --watch=false
 # DEPLOY PHASE
 # services:

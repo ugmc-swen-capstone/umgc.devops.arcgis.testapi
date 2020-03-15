@@ -45,7 +45,6 @@ export class AddressLocatorService {
     ): Promise<any> {
         // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#methods-summary
         let clientMap = this.mapDirectory[portalItemId];
-
         /**
          * Future implementation if this service is used accross different
          * citites, this will hopefully saving on re-loading a city's maps
