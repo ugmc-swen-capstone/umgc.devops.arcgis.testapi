@@ -5,6 +5,9 @@
 ## Using the latest version of node on travis
 language: node_js
 
+node_js:
+    - 13.2.0
+
 branches:
     only:
         - master
