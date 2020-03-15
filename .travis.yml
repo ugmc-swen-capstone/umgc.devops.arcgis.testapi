@@ -15,7 +15,7 @@ branches:
 addons:
     chrome: stable
     sonarcloud:
-        organization: 'ugmc-swen-capstone_umgc.devops.arcgis.testapi'
+        organization: 'ugmc-swen-capstone'
         token: $SONAR_TOKEN
 
 cache:
