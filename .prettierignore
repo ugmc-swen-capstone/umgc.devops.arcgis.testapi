@@ -4,3 +4,4 @@
 **/.nyc_output
 **/.github
 **/node_modules
+**/*.conf.js

@@ -4,6 +4,6 @@ node_modules
 dist
 # don't lint nyc coverage output
 coverage
-
+**/*.conf.js
 test.ts
 ref.ts
