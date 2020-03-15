@@ -1,19 +1,33 @@
-dist: trusty
+# INSTALL PHASE
+# https://docs.travis-ci.com/user/for-beginners
+# https://docs.travis-ci.com/user/job-lifecycle
 
+## Using the latest version of node on travis
 language: node_js
 
-node_js:
-    - '11.0'
-
-sudo: required
+branches:
+    only:
+        - master
 
 addons:
     chrome: stable
-    organization: 'umgc-capstone-bot'
 
 cache:
     directories:
         - ./node_modules
+
+before_install:
+    - npm install -g @angular/cli@latest
+
+install:
+    - npm ci
+
+# SCRIPT PHASE
+
+script:
+    - ng lint
+    - ng test --watch=false
+# DEPLOY PHASE
 # services:
 #   - docker
 
